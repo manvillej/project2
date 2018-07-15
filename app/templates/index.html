@@ -1,0 +1,13 @@
+<html>
+    <head>
+        <!-- project style sheets -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+        <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+        <title>Flask-SocketIO-Chat</title>
+    </head>
+    <body>
+        <h1>Flask-SocketIO-Chat</h1>
+        {% include 'components/component.html' %}
+        {% include 'forms/NewUser.html' %}
+    </body>
+</html>
