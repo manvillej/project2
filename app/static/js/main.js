@@ -4,8 +4,7 @@ document.addEventListener(
             const username = document.querySelector("#username").value
             localStorage.setItem('username', username)
 
-            alert(localStorage.getItem('username'))
-
+            //need to use the username
             return false
         }
 
@@ -42,5 +41,18 @@ document.addEventListener(
             const form = document.querySelector("#NewChannel")
             form.reset();
             return false
+        }
+
+        //document.getElementById("mySubmit").disabled = true;
+
+    });
+document.addEventListener(
+    'keyup', function(){
+        const name_length = document.querySelector("#channel").value.length
+        
+        if(name_length>0){
+            document.getElementById("channelSubmit").disabled = false;
+        } else {
+            document.getElementById("channelSubmit").disabled = true;
         }
     });
