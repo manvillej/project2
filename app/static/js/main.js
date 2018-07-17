@@ -37,6 +37,10 @@ document.addEventListener(
             data.append('channel', channel);
 
             request.send(data);
+
+
+            const form = document.querySelector("#NewChannel")
+            form.reset();
             return false
         }
     });
