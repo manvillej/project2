@@ -1,5 +1,5 @@
 document.addEventListener(
-	'DOMContentLoaded',function() {
+	'DOMContentLoaded', function() {
    		document.querySelector("#NewUser").onsubmit = () => {
    			const username = document.querySelector("#username").value
    			localStorage.setItem('username', username)
@@ -7,9 +7,4 @@ document.addEventListener(
    			alert(localStorage.getItem('username'))
    			return false
    		}
-
-
-
-
-
 	});
