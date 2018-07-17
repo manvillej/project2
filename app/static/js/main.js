@@ -22,7 +22,12 @@ document.addEventListener(
                 const data = JSON.parse(request.responseText);
 
                 if(data.success) {
-                    alert(data.channel);
+                    const li = document.createElement('li')
+                    li.innerHTML = data.channel
+                    li.value = data.channel
+                    document.querySelector('#channels').append(li);
+                    //switch channel to new channel when created
+                    //add invite others option for channels
                 } else {
                     alert("Fail");
                 }
