@@ -4,4 +4,4 @@ from flask import render_template
 
 main = Blueprint('main', __name__)
 
-from . import routes
+from . import routes, events

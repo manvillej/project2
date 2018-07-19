@@ -1,8 +1,24 @@
 document.addEventListener(
     'DOMContentLoaded', function() {
+        const socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port)
+
+        /*socket.on('connect', () => {
+            socket.emit('arrived', {})
+        });*/
+        socket.on("add channel", data =>{
+            const li = document.createElement('li');
+            li.innerHTML = data;
+            li.value = data;
+            li.onclick = function(){ alert('Hello' );};
+            document.querySelector('#channels').append(li);
+        });
+
+
+
+
         document.querySelector("#NewUser").onsubmit = () => {
             const username = document.querySelector("#username").value
-            localStorage.setItem('username', username)
+            localStorage.setItem('username', username);
 
             //need to use the username
             return false
@@ -11,33 +27,11 @@ document.addEventListener(
         document.querySelector("#NewChannel").onsubmit = () => {
 
             // Initialize new request
-            const request = new XMLHttpRequest();
             const channel = document.querySelector("#channel").value
+            socket.emit('newChannel', {'channel':channel})
 
-            request.open('POST', '/api');
-            
-            // Callback function for when request completes
-            request.onload = () => {
-                const data = JSON.parse(request.responseText);
-
-                if(data.success) {
-                    const li = document.createElement('li')
-                    li.innerHTML = data.channel
-                    li.value = data.channel
-                    document.querySelector('#channels').append(li);
-                    //switch channel to new channel when created
-                    //add invite others option for channels
-                } else {
-                    alert("Fail");
-                }
-            }
-
-            const data = new FormData();
-            data.append('channel', channel);
-
-            request.send(data);
-
-
+            /*;
+            */
             const form = document.querySelector("#NewChannel")
             form.reset();
             return false
