@@ -8,8 +8,14 @@ import logging
 @socketio.on("newChannel")
 def newChannel(data):
 	channel = data["channel"]
-	print(channel)
 	emit("add channel", channel, broadcast=True)
+
+@socketio.on("switchChannels")
+def newChannel(data):
+	print(f'User: {data["username"]}')
+	print(f'Old channel: {data["oldChannel"]}')
+	print(f'New channel: {data["newChannel"]}')
+	# emit("add channel", channel, broadcast=True)
 
 
 
