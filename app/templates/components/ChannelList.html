@@ -1,5 +1,7 @@
-<ul id="ChannelList" class="list-group" onclick="changeChannels(event)">
-	{% for channel in channels %}
-		{% include 'components/Channel.html' %}
-    {% endfor %}
-</ul>
+<div id="channel">
+	<ul id="ChannelList" class="list-group" onclick="changeChannels(event)">
+		{% for channel in channels %}
+			{% include 'components/Channel.html' %}
+	    {% endfor %}
+	</ul>
+</div>

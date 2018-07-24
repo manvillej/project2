@@ -25,7 +25,7 @@ document.addEventListener(
 
         document.querySelector("#NewChannel").onsubmit = () => {
             // Initialize new request
-            const channel = document.getElementById("channel").value;
+            const channel = document.getElementById("channelInput").value;
             const username = localStorage.getItem("username");
 
             socket.emit('newChannel', {'channel':channel, 'creator':username});
@@ -45,9 +45,11 @@ document.addEventListener(
             const user_display = document.getElementById("user");
             user_display.innerHTML = username;
 
-            document.getElementById("channels").style.display = "block";
-            document.getElementById("MessageSection").style.display = "block";
             document.getElementById("NewUser").style.display = "none";
+            document.getElementById("ChannelList").style.display="block";
+            document.getElementById("channelsListSection").style.display="block";
+            document.getElementById("MessageSection").style.display="block";
+            document.getElementById("NewMessage").style.display="block";
 
             socket.emit('switchChannels', setChannel("general"));
             
@@ -68,12 +70,22 @@ document.addEventListener(
 
 document.addEventListener(
     'keyup', function(){
-        const name_length = document.getElementById("channel").value.length;
+        const name_length = document.getElementById("channelInput").value.length;
         
         if(name_length>0){
             document.getElementById("channelSubmit").disabled = false;
         } else {
             document.getElementById("channelSubmit").disabled = true;
+        }
+    });
+document.addEventListener(
+    'keyup', function(){
+        const name_length = document.getElementById("username").value.length;
+        
+        if(name_length>0){
+            document.getElementById("userSubmit").disabled = false;
+        } else {
+            document.getElementById("userSubmit").disabled = true;
         }
     });
 
@@ -115,8 +127,10 @@ function onloadChannel(){
     if(username){
         document.getElementById("NewUser").style.display="none";
     } else {
-        document.getElementById("channels").style.display="none";
+        document.getElementById("ChannelList").style.display="none";
+        document.getElementById("channelsListSection").style.display="none";
         document.getElementById("MessageSection").style.display="none";
+        document.getElementById("NewMessage").style.display="none";
     }
 
     const current_channel = localStorage.getItem("CurrentChannel")
