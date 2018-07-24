@@ -36,8 +36,9 @@ document.addEventListener(
             const user_display = document.querySelector("#user");
             user_display.innerHTML = username;
 
-            document.getElementById("channels").style.display="block";
-            document.getElementById("NewUser").style.display="none";
+            document.getElementById("channels").style.display = "block";
+            document.getElementById("MessageSection").style.display = "block";
+            document.getElementById("NewUser").style.display = "none";
 
             socket.emit('switchChannels', setChannel("general"));
             
@@ -96,6 +97,7 @@ function onloadChannel(){
         document.getElementById("NewUser").style.display="none";
     } else {
         document.getElementById("channels").style.display="none";
+        document.getElementById("MessageSection").style.display="none";
     }
 
     if(!localStorage.getItem("CurrentChannel")){
