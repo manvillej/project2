@@ -5,13 +5,29 @@
         <script src="{{ url_for('static', filename='js/main.js') }}"></script>
         <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
-        <title>Flask-SocketIO-Chat</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+        <title>Chat Client</title>
     </head>
     <body>
-        <h1>Flask-SocketIO-Chat: <span id="user"></span>, <span id="room"></span></h1>
-        {% include 'components/component.html' %}
-        {% include 'forms/NewUser.html' %}
-        {% include 'forms/NewChannel.html' %}
-        {% include 'components/MessageSection.html' %}
+        <div class="container-fluid">
+            <div class="jumbotron">
+                  <h1 class="display-4">My Chat Client!</h1>
+                  <p class="lead">A simple chat client by Jeff Manville.</p>
+                  <hr class="my-4">
+                  <p id="userdetails"><span id="user"></span> <span id="room"></span>insert text here</p>
+            </div>
+            <div class="row">
+                {% include 'forms/NewUser.html' %}
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    {% include 'forms/NewChannel.html' %}
+                </div>
+                <div class="col-sm-9">
+                    {% include 'components/MessageSection.html' %}
+                </div>
+            </div>
+            
+        </div>
     </body>
 </html>
