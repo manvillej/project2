@@ -25,6 +25,10 @@ def newChannel(data):
 	now = datetime.now()
 	time = now.strftime("%H:%M:%S %d/%m/%Y")
 	print(f'Message: {data["message"]}, User:{data["username"]}, time: {time}')
+	emit("new message", {
+		'message':data["message"],
+		'username':data["username"],
+		'created':time})
 
 
 

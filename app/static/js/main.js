@@ -7,19 +7,33 @@ document.addEventListener(
         onloadChannel();
 
         socket.on("add channel", data =>{
+
+            //replace with handlebars
             const li = document.createElement('li');
             li.innerHTML = data.channel;
             li.dataset.channel = data.channel;
+
             //data.creator
-            document.querySelector('#ChannelList').append(li); 
+            document.getElementById('ChannelList').append(li); 
+        }); 
+
+        socket.on("new message", data =>{
+
+            //replace with handlebars
+            const li = document.createElement('li');
+            const message = document.createElement('span');
+            message.innerHTML = "message: " + data.message + " - " + data.username + ", " + data.created;
+
+            li.append(message)
+
+            document.getElementById('Messages').append(li); 
         });
 
         document.querySelector("#NewChannel").onsubmit = () => {
             // Initialize new request
-            const channel = document.querySelector("#channel").value;
-            socket.emit('newChannel', {'channel':channel, 'creator':localStorage.getItem("username")});
+            const channel = document.getElementById("channel").value;
 
-            
+            socket.emit('newChannel', {'channel':channel, 'creator':localStorage.getItem("username")});
 
             socket.emit('switchChannels', setChannel(channel));
 
@@ -29,11 +43,11 @@ document.addEventListener(
         }
         
         document.querySelector("#NewUser").onsubmit = () => {
-            const username = document.querySelector("#username").value;
+            const username = document.getElementById("username").value;
             localStorage.setItem('username', username);
 
             // replace with handlebars
-            const user_display = document.querySelector("#user");
+            const user_display = document.getElementById("user");
             user_display.innerHTML = username;
 
             document.getElementById("channels").style.display = "block";
@@ -46,7 +60,7 @@ document.addEventListener(
         }
 
         document.querySelector("#NewMessage").onsubmit = () => {
-            const message = document.querySelector("#NewMessageContent").value;
+            const message = document.getElementById("NewMessageContent").value;
 
             // replace with handlebars
 
@@ -59,7 +73,7 @@ document.addEventListener(
 
 document.addEventListener(
     'keyup', function(){
-        const name_length = document.querySelector("#channel").value.length;
+        const name_length = document.getElementById("channel").value.length;
         
         if(name_length>0){
             document.getElementById("channelSubmit").disabled = false;
