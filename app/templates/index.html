@@ -9,15 +9,11 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
         {% include 'components/message-template.html' %}
         <title>Chat Client</title>
+        <meta charset="UTF-8">
     </head>
     <body>
         <div class="container-fluid">
-            <div class="jumbotron">
-                  <h1 class="display-4">My Chat Client!</h1>
-                  <p class="lead">A simple chat client by Jeff Manville.</p>
-                  <hr class="my-4">
-                  <p id="userdetails"><span id="user"></span> <span id="room"></span>insert text here</p>
-            </div>
+            {% include 'components/jumbotron.html' %}
             <div class="row">
                 {% include 'forms/NewUser.html' %}
             </div>

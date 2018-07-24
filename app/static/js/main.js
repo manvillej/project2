@@ -19,7 +19,6 @@ document.addEventListener(
         }); 
 
         socket.on("new message", data =>{
-            //replace with handlebars
             createMessageElement(data.message, data.username, data.created);
         });
 
@@ -175,7 +174,6 @@ function getMessages(current_channel){
 function createMessageElement(text, username, time){
     const source = document.getElementById("message-template").innerHTML;
     const template = Handlebars.compile(source);
-
     const context = {
         "message":text,
         "username":username,
@@ -184,4 +182,10 @@ function createMessageElement(text, username, time){
 
     const html = template(context);
     $('#Messages').append(html)
+}
+
+function likeMessage(event){
+    var target_channel_element = event.target;
+    message = localStorage.getItem('username') +" liked " + target_channel_element.dataset.author + "'s message";
+    socket.emit("NewMessage", getMessageObject(message));
 }
