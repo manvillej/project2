@@ -1,0 +1,13 @@
+
+<script id="message-template" type="text/x-handlebars-template">
+    <div class="card", style="width:60%;">
+        <div class="card-body">
+        	<p>
+            	{% raw %}{{message}}{% endraw %}
+            </p>
+        </div>
+        <div class="card-footer">
+            <span class="btn-group"> - {% raw %}{{username}}{% endraw %} : {% raw %}{{created}}{% endraw %}   <a href="#" onclick="likeMessage(event)" data-author="{% raw %}{{username}}{% endraw %}" class="btn btn-primary btn-sm">Like</a></span>
+        </div>
+    </div>
+</script>

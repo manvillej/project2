@@ -1,7 +1,17 @@
-from flask import render_template
+from flask import render_template, jsonify, request
 from . import main
+from .models import Channels, Messages
+
 
 @main.route("/")
 def index():
+    """"""
     template='index.html'
-    return render_template(template)
+    channels = Channels.getChannels()
+    return render_template(template, channels=channels)
+
+
+@main.route("/api/message/<channel>")
+def messages(channel):
+    """"""
+    return jsonify(Messages.getMessages(channel))
