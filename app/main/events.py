@@ -2,7 +2,7 @@ from flask_socketio import emit, join_room, leave_room
 from .. import socketio
 from . import main
 from .models import Channels
-
+from datetime import datetime
 
 @socketio.on("newChannel")
 def newChannel(data):
@@ -19,6 +19,12 @@ def newChannel(data):
 	print(f'Old channel: {data["oldChannel"]}')
 	print(f'New channel: {data["newChannel"]}')
 
+
+@socketio.on("NewMessage")
+def newChannel(data):
+	now = datetime.now()
+	time = now.strftime("%H:%M:%S %d/%m/%Y")
+	print(f'Message: {data["message"]}, User:{data["username"]}, time: {time}')
 
 
 

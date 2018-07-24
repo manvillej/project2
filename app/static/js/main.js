@@ -16,30 +16,41 @@ document.addEventListener(
 
         document.querySelector("#NewChannel").onsubmit = () => {
             // Initialize new request
-            const channel = document.querySelector("#channel").value
-            socket.emit('newChannel', {'channel':channel, 'creator':localStorage.getItem("username")})
+            const channel = document.querySelector("#channel").value;
+            socket.emit('newChannel', {'channel':channel, 'creator':localStorage.getItem("username")});
 
-            const form = document.querySelector("#NewChannel")
-
-            socket.emit('switchChannels', setChannel(channel))
             
-            form.reset();
-            return false
+
+            socket.emit('switchChannels', setChannel(channel));
+
+            clearForm("NewChannel")
+
+            return false;
         }
         
         document.querySelector("#NewUser").onsubmit = () => {
-            const username = document.querySelector("#username").value
+            const username = document.querySelector("#username").value;
             localStorage.setItem('username', username);
 
             // replace with handlebars
-            const user_display = document.querySelector("#user")
-            user_display.innerHTML = username
+            const user_display = document.querySelector("#user");
+            user_display.innerHTML = username;
 
             document.getElementById("channels").style.display="block";
             document.getElementById("NewUser").style.display="none";
 
-            socket.emit('switchChannels', setChannel("general"))
+            socket.emit('switchChannels', setChannel("general"));
             
+            return false
+        }
+
+        document.querySelector("#NewMessage").onsubmit = () => {
+            const message = document.querySelector("#NewMessageContent").value;
+
+            // replace with handlebars
+
+            socket.emit("NewMessage", getMessageObject(message));
+            clearForm("NewMessage")
             return false
         }
 
@@ -47,7 +58,7 @@ document.addEventListener(
 
 document.addEventListener(
     'keyup', function(){
-        const name_length = document.querySelector("#channel").value.length
+        const name_length = document.querySelector("#channel").value.length;
         
         if(name_length>0){
             document.getElementById("channelSubmit").disabled = false;
@@ -74,7 +85,7 @@ function setChannel(newChannel){
         "newChannel":newChannel,
         "username":localStorage.getItem('username')
     }
-    localStorage.setItem("CurrentChannel", newChannel)
+    localStorage.setItem("CurrentChannel", newChannel);
     return dictionary
 }
 
@@ -90,4 +101,17 @@ function onloadChannel(){
     if(!localStorage.getItem("CurrentChannel")){
         socket.emit('switchChannels', setChannel("general")) // add find last channel visited, have a fall back
     }
+}
+
+function getMessageObject(message){
+    const message_object = {
+        "message":message,
+        "username":localStorage.getItem('username')
+    }
+    return message_object;
+}
+
+function clearForm(formID){
+    const form = document.getElementById(formID);
+    form.reset();
 }
