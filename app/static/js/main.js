@@ -159,13 +159,15 @@ function getMessages(current_channel){
 }
 
 function createMessageElement(text, username, time){
-    //replace with handlebars
-    /*
+    const source = document.getElementById("message-template").innerHTML;
+    const template = Handlebars.compile(source);
 
-    */
-    const li = document.createElement('li');
-    const message = document.createElement('span');
-    message.innerHTML = "message: " + text + " - " + username + ", " + time;
-    li.append(message);
-    document.getElementById('Messages').append(li);
+    const context = {
+        "message":text,
+        "username":username,
+        "created":time
+    }
+
+    const html = template(context);
+    $('#Messages').append(html)
 }
