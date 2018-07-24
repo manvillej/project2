@@ -161,14 +161,7 @@ function getMessages(current_channel){
 function createMessageElement(text, username, time){
     //replace with handlebars
     /*
-    <div class="card">
-        <div class="card-body">
-            This is some text within a card body.
-        </div>
-        <div class="card-footer">
-            Featured
-        </div>
-    </div>
+
     */
     const li = document.createElement('li');
     const message = document.createElement('span');
